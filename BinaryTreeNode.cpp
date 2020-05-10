@@ -17,7 +17,7 @@ public:
 		_right{std::shared_ptr<BinaryTreeNode>{}}
 	{}
 
-	void insert(const int value);
+	void insert(int value);
 	void ldr();
 	void layer_print();
 
@@ -31,7 +31,7 @@ private:
 };
 
 
-void BinaryTreeNode::insert(const int value)
+void BinaryTreeNode::insert(int value)
 {
 	if(value < _value)
 	{
@@ -40,7 +40,7 @@ void BinaryTreeNode::insert(const int value)
 		else
 			_left = std::make_shared<BinaryTreeNode>(value);
 	}
-        else if(value > _value)
+	else if(value > _value)
 	{
 		if(_right != nullptr)
 			_right->insert(value);
@@ -49,6 +49,7 @@ void BinaryTreeNode::insert(const int value)
 	}
 }
 
+//中序遍历
 void BinaryTreeNode::ldr()
 {
 	if(_left != nullptr)
@@ -66,12 +67,14 @@ void BinaryTreeNode::layer_print()
 	for(auto iter = nodes.begin(); iter != nodes.end(); ++iter)
 	{
 		if(*iter)
-			std::cout << (*iter)->_value << std::endl;
+			std::cout << (*iter)->_value << " ";
+			//std::cout << (*iter)->_value << std::endl;
 		else
 			std::cout << std::endl;
 	}
 }
 
+//层序添加，层与层之间用nullptr隔开
 std::vector<std::shared_ptr<BinaryTreeNode>> BinaryTreeNode::layer_contents()
 {
 	std::vector<std::shared_ptr<BinaryTreeNode>> nodes;
@@ -80,7 +83,7 @@ std::vector<std::shared_ptr<BinaryTreeNode>> BinaryTreeNode::layer_contents()
 
 	for(int index = 0; index < nodes.size(); ++index)
 	{
-		//std::cout << "nodes.size() == " << nodes.size() << std::endl;
+		std::cout << "nodes.size() == " << nodes.size() << std::endl;
 		if(!nodes.at(index))
 		{
 			if(index == nodes.size() - 1)
